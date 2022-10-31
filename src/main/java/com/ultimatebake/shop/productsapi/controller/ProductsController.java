@@ -17,7 +17,7 @@ final ProductsService productsService;
 		this.productsService = productsService;
 	}
 
-	@GetMapping
+	@GetMapping("/all")
 	public Iterable<Products> getProducts() {
 		return productsService.all();
 	}

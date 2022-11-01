@@ -17,6 +17,12 @@ import com.ultimatebake.shop.productsapi.service.ProductsService;
 
 @RestController
 @RequestMapping("/products")
+/**
+ * Controller class resposible for Products API
+ * provides crud functionality
+ * @author Rahma
+ *
+ */
 public class ProductsController {
 	final ProductsService productsService;
 

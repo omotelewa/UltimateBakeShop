@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 import com.ultimatebake.shop.productsapi.repository.ProductsRepository;
 import com.ultimatebake.shop.productsapi.repository.entity.Products;
 @Service
+/**
+ * Service class responsible for Business logic 
+ * to perform crud using repository class
+ * @author Rahma
+ *
+ */
 public class ProductsServiceMySQL implements ProductsService {
 
 	private final ProductsRepository productsRepository;
@@ -18,6 +24,9 @@ public class ProductsServiceMySQL implements ProductsService {
 	}
 
 	@Override
+	/**
+	 * Adds a product 
+	 */
 	public Products save(Products product) {
 		
 		return productsRepository.save(product);
@@ -25,6 +34,9 @@ public class ProductsServiceMySQL implements ProductsService {
 	}
 
 	@Override
+	/**
+	 * deletes a product by id
+	 */
 	public boolean delete(int productId) {
 		
 		productsRepository.deleteById(productId);
@@ -32,12 +44,18 @@ public class ProductsServiceMySQL implements ProductsService {
 	}
 
 	@Override
+	/**
+	 * Finds all product
+	 */
 	public List<Products> all() {
 		return (List<Products>) productsRepository.findAll();
 
 	}
 
 	@Override
+	/**
+	 * Finds product by Id
+	 */
 	public Products findById(int productId) {
 			return productsRepository.findById(productId).get();
 	}

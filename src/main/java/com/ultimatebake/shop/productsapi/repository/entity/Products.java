@@ -7,6 +7,11 @@ import javax.persistence.Id;
 
 import com.ultimatebake.shop.productsapi.dto.ProductsDto;
 @Entity
+/**
+ * Entity Class for Products table
+ * @author Rahma
+ *
+ */
 public class Products {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

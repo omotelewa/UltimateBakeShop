@@ -1,5 +1,9 @@
 package com.ultimatebake.shop.productsapi.dto;
-
+/**
+ * DTO Class for Products Entity
+ * @author Rahma
+ *
+ */
 public class ProductsDto {
 	private String name;
 	private String description;

@@ -5,6 +5,10 @@ public class ProductsDto {
 	private String description;
 	private String imageUrl;
 
+	public ProductsDto() {
+		super();
+	}
+
 	public ProductsDto(String name, String description, String imageUrl) {
 		this.name = name;
 		this.description = description;

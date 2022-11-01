@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.ultimatebake.shop.productsapi.dto.ProductsDto;
 @Entity
 public class Products {
 	@Id
@@ -12,6 +14,17 @@ public class Products {
 	private String name;
 	private String description;
 	private String imageUrl;
+	
+	
+	
+	public Products() {
+		super();
+	}
+	public Products(ProductsDto productsDto) {
+		this.name = productsDto.getName();
+		this.description = productsDto.getDescription();
+		this.imageUrl = productsDto.getImageUrl();
+	}
 	public Integer getId() {
 		return id;
 	}

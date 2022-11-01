@@ -3,18 +3,15 @@ package com.ultimatebake.shop.productsapi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -75,6 +72,51 @@ public class ProductsControllerTest {
 		Mockito.when(productsService.save(Mockito.any(Products.class))).thenReturn(products);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/products").accept(MediaType.APPLICATION_JSON)
+				.content(requestBodyJson).contentType(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		assertEquals(200, response.getStatus());
+
+	}
+	
+	@Test
+	public void testGetFindProductById() throws Exception {
+
+		Products products = new Products();
+		products.setId(1);
+		products.setName("Choco Cookies");
+		products.setDescription("Filled with choco");
+		products.setImageUrl("choco.jpg");
+		Mockito.when(productsService.findById(1)).thenReturn(products);
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/products/1").accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		System.out.println(result.getResponse());
+		String expected = "{\"id\":1,\"name\":\"Choco Cookies\",\"description\":\"Filled with choco\",\"imageUrl\":\"choco.jpg\"}";
+
+		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+	}
+	
+	@Test
+	public void testUpdateProducts() throws Exception {
+		Products products = new Products();
+		products.setId(1);
+		products.setName("Choco Cookies");
+		products.setDescription("Filled with choco");
+		products.setImageUrl("choco.jpg");
+
+		String requestBodyJson = "{\"name\":  \"Choco Cookies\",\"description\": \"Filled with choco\", \"imageUrl\" : \"choco.jpg\"\r\n"
+				+ "}";
+		Mockito.when(productsService.findById(1)).thenReturn(products);
+
+		Mockito.when(productsService.save(Mockito.any(Products.class))).thenReturn(products);
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/products/1").accept(MediaType.APPLICATION_JSON)
 				.content(requestBodyJson).contentType(MediaType.APPLICATION_JSON);
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();

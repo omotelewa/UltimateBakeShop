@@ -1,6 +1,7 @@
 package com.ultimatebake.shop.productsapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class ProductsController {
 		return productsService.all();
 	}
 
+	@CrossOrigin
 	@PostMapping
 	public Products save(@RequestBody ProductsDto productsDto) {
 		return productsService.save(new Products(productsDto));
